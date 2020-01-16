@@ -1,0 +1,49 @@
+.home {
+    min-height: 100vh;
+    background: linear-gradient(to left, #E5E5BE, #003973);
+    position: relative;
+    padding-bottom: 80px;
+
+    .header {
+        min-height: 550px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        background-image: url('../../images/owen-walters-8C-TxFyk6UE-unsplash.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        .caption {
+            width: auto;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: lighter;
+            color: #fff;
+            text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+            margin: auto;
+    
+            h4 {
+                font-size: 3rem;
+                margin: 1rem;
+                letter-spacing: 2px;
+                word-spacing: 5px;
+                // background-color: #444;
+            }
+    
+            p {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+                word-spacing: 5px;
+                // background-color: #444;
+            }
+        }
+    }
+
+    .search-area {
+        width: 60%;
+        margin: -120px auto 0 auto;
+    }
+}
