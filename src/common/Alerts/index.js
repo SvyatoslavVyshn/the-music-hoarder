@@ -6,7 +6,7 @@ import MessageList from './MessageList'
 const Alerts = props => {
     const alerts = useSelector(state => state.alerts)
     
-    if(props.alerts.length > 0) {
+    if(alerts.length > 0) {
         return <MessageList removeAlert={removeAlert} data={alerts} />
     }
     return null
