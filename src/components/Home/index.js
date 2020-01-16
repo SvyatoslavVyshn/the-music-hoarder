@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 
 import Moods from './Moods'
 import Genres from './Genres'
 
-import { login } from '../../store/auth/actions'
+// import { login } from '../../store/auth/actions'
 
 import "./home.scss"
 
 function Home () {
-    const dispatch = useDispatch()
     const [tabValue, setTabValue] = useState(0);
 
 
@@ -53,6 +52,17 @@ function Home () {
                         <Genres />
                     </Paper>
                 )}
+
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    size="large"
+                    className="submit-button"
+                    onClick={() => ''}
+                >
+                    Search
+                </Button>
+
             </div>
         </div>
     )
