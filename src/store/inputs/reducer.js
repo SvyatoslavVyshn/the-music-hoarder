@@ -1,4 +1,4 @@
-import { CHANGE_SINGLE_MOOD, SELECT_GENRE } from './actions'
+import { CHANGE_SINGLE_MOOD, SELECT_GENRE, SEARCH_GENRE } from './actions'
 import genres from '../../data/genres'
 
 const initialStore = {
@@ -33,11 +33,25 @@ export default function moodsReducer (state = initialStore, action) {
 
         case SELECT_GENRE: {
             const newGenres = state.genres.slice()
-            newGenres[action.index].checked = !newGenres[action.index].checked
+            const selected = newGenres.find(genre => genre.label === action.name)
+            selected.checked = !selected.checked
             return {
                 ...state,
                 genres: newGenres,
                 selectedGenres: newGenres.filter(genre => genre.checked)
+            }
+        }
+
+        case SEARCH_GENRE: {
+            const newGenres = genres.filter( genre => {
+               if(action.arr.length > 0) {
+                return action.arr.find(item => item.label === genre.label)
+               }
+               return genres
+            } )
+            return {
+                ...state,
+                genres: newGenres
             }
         }
         default:
