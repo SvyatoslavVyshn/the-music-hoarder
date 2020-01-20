@@ -35,9 +35,10 @@ function Home () {
                 </div>
             </div>
             <div className="content">
-                <Container maxWidth="lg">
+                
                     <Playlist/>
-                </Container>
+                
+                
             </div>
         </div>
     )
