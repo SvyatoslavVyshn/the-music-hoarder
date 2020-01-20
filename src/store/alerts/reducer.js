@@ -14,7 +14,6 @@ function handleErrorMessages (error) {
         ]
     }
     if(error.response) {
-        console.log(error.response)
         return [
             {
                 id: getId(),
