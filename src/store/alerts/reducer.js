@@ -14,10 +14,11 @@ function handleErrorMessages (error) {
         ]
     }
     if(error.response) {
+        console.log(error.response)
         return [
             {
                 id: getId(),
-                text: error.response.statusText,
+                text: error.response.statusText.length > 0 ? error.response.statusText : error.response.data.error.message,
                 title: `Error ${error.response.status}`,
                 error: true
             }
