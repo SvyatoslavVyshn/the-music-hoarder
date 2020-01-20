@@ -2,7 +2,8 @@
     min-height: 100vh;
     // background: linear-gradient(to left, #E5E5BE, #003973);
     position: relative;
-    // padding-bottom: 80px;
+    background: linear-gradient(to right, #dae2f8, #d6a4a4);
+    padding-bottom: 80px;
 
     .submit-button {
         position: fixed;
@@ -58,12 +59,11 @@
     .content {
         // background: rgba(0,0,0,0.1);
         min-height: calc(100vh - 550px);
-        padding-top: 20px;
+        margin-top: 40px;
         display: flex;
         align-items: center;
         align-content: center;
         justify-content: center;
-        background: linear-gradient(to right, #dae2f8, #d6a4a4);
     }
 
     .search-area {
