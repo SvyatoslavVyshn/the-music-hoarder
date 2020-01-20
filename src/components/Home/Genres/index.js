@@ -23,15 +23,20 @@ const Genres = props => {
 
     return (
         <div className="genres">
-            <Grid container spacing={5}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid container spacing={5} justify="center">
+                <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                     <Autocomplete
                         multiple
                         options={genresData}
                         getOptionLabel={option => option}
                         onChange={(e, value) => handleSelect(value)}
                         renderInput={params => 
-                            <TextField {...params} variant="standard" label="Search genre" fullWidth />  
+                            <TextField 
+                                {...params}
+                                variant="outlined"
+                                label="Select genres"
+                                fullWidth
+                            />  
                         }
                     />
                 </Grid>

@@ -49,7 +49,7 @@ const SliderComponent = props => {
 }
 
 function areEqual (prevProps, nexProps) {
-    return prevProps.value === nexProps.value
+    return prevProps.value === nexProps.value && prevProps.value[0] === nexProps.value[0] && prevProps.value[1] === nexProps.value[1] && prevProps.name === nexProps.name
 }
 
 export default memo(SliderComponent, areEqual)

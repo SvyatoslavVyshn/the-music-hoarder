@@ -1,68 +1,38 @@
-import React, { useState } from 'react'
-
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Paper from '@material-ui/core/Paper'
+import React from 'react'
 import Button from '@material-ui/core/Button'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Moods from './Moods'
 import Genres from './Genres'
 
+import { getPlaylist } from '../../store/playlist/actions'
 // import { login } from '../../store/auth/actions'
 
 import "./home.scss"
 
 function Home () {
-    const [tabValue, setTabValue] = useState(0);
-
-
-    const handleTabChange = (event, newValue) => {
-        setTabValue(newValue);
-    };
+    const dispatch = useDispatch()
+    const inputs = useSelector(state => state.inputs)
+    const token = useSelector(state => state.auth.access_token)
 
     return (
         <div className="home">
             <div className="header">
                 <div className="caption">
-                    <h4>Welcome User!</h4>
-                    <p>Note that max quantity of selected genres is 5!</p>
+                    <Moods/>
+                    <Genres/>
+                    <Button 
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => dispatch(
+                            getPlaylist(token, inputs.moodValues, inputs.selectedGenres)
+                        )}
+                    >
+                        Search
+                    </Button>
                 </div>
             </div>
             <div className="search-area">
-                <Paper square>
-                    <Tabs
-                        indicatorColor="primary"
-                        textColor="primary"
-                        value={tabValue}
-                        onChange={handleTabChange}
-                    >
-                        <Tab label="Moods"/>
-                        <Tab label="Genres"/>
-                    </Tabs>
-                </Paper>
-
-                { tabValue === 0 && (
-                    <Paper square>
-                        <Moods />
-                    </Paper>
-                )}
-
-                { tabValue === 1 && (
-                    <Paper square>
-                        <Genres />
-                    </Paper>
-                )}
-
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    size="large"
-                    className="submit-button"
-                    onClick={() => ''}
-                >
-                    Search
-                </Button>
-
             </div>
         </div>
     )

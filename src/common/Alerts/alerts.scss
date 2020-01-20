@@ -1,0 +1,71 @@
+.message-list {
+    position: fixed;
+    z-index: 10;
+    top: unset;
+    width: 30%;
+    display: block;
+    right: 50px;
+        .status-message {
+            font-size: 1.2rem;
+        }
+}
+
+.alert-wrapper {
+    margin: 8px;
+    color: #fff;
+    padding: 6px 24px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.01071rem;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+
+.alert {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.alert-content {
+    padding: 8px 0;
+}
+
+.alert-content-container {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.alert-actions {
+    display: flex;
+    align-items: flex-start;
+    margin-left: auto;
+    padding-left: 24px;
+    margin-right: -8px;
+}
+
+.danger-alert {
+    background-color: #d32f2f;
+}
+
+.success-alert {
+    background-color: #43a047;
+}
+
+@media (min-width: 960px) {
+    .alert-wrapper {
+        min-width: 288px;
+        max-width: 468px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 930px) {
+    .alert-wrapper {
+        min-width: 288px;
+        max-width: 468px;
+        border-radius: 4px;
+    }
+}

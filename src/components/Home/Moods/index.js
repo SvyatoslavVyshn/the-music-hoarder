@@ -20,7 +20,7 @@ const Moods = props => {
 
     return (
         <div className="moods">
-            <Grid container spacing={5}>
+            <Grid container spacing={8}>
                 {moods.map( mood => (
                         <Grid item xl={3} lg={3} md={4} sm={6} xs={12} key={mood.label}>
                             <Slider
@@ -29,9 +29,9 @@ const Moods = props => {
                                 label={mood.label}
                                 min={parseFloat(mood.min)}
                                 max={parseFloat(mood.max)}
-                                value={parseFloat(inputReducer.moodValues[mood.label])}
-                                textValue={inputReducer.moodValues[mood.label]}
-                                name={mood.label}
+                                value={[parseFloat(inputReducer.moodValues[mood.minCode]), parseFloat(inputReducer.moodValues[mood.maxCode])]}
+                                textValue={inputReducer.moodValues[mood.code]}
+                                name={`${mood.minCode} - ${mood.maxCode}`}
                                 step={mood.step}
                             />
                         </Grid>
