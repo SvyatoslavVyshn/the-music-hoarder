@@ -35,10 +35,7 @@ function Home () {
                 </div>
             </div>
             <div className="content">
-                
-                    <Playlist/>
-                
-                
+                <Playlist/>
             </div>
         </div>
     )
