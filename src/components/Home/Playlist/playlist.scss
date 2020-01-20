@@ -1,0 +1,17 @@
+.playlist {
+    
+    margin-top: -80px;
+}
+
+.playlist-placeholder {
+    height: 100%;
+    text-align: center;
+    .playlist-caption {
+        font-size: 1.3rem;
+        color: #444;
+        
+        & > p {
+            padding-bottom: 15px;
+        }
+    }
+}

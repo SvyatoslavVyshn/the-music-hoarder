@@ -1,9 +1,11 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Moods from './Moods'
 import Genres from './Genres'
+import Playlist from './Playlist'
 
 import { getPlaylist } from '../../store/playlist/actions'
 // import { login } from '../../store/auth/actions'
@@ -32,7 +34,10 @@ function Home () {
                     </Button>
                 </div>
             </div>
-            <div className="search-area">
+            <div className="content">
+                <Container maxWidth="lg">
+                    <Playlist/>
+                </Container>
             </div>
         </div>
     )

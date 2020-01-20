@@ -8,6 +8,16 @@ const theme = createMuiTheme({
         primary: blue,
         secondary: yellow,
         error: red
+    },
+    overrides: {
+        MuiInput: {
+            underline:{
+                borderColor: 'rgba(255, 255, 255, 0.23)'
+            }
+        },
+        'MuiAutocomplete-root': {
+            borderColor: '#fff'
+        }
     }
 })
 

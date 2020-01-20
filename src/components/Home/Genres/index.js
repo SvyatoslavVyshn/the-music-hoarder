@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -10,8 +11,15 @@ import genresData from '../../../data/genres'
 
 import './genres.scss'
 
+const useStyles = makeStyles({
+    notchedOutline: {
+        borderColor: '#fff !important'
+    }
+})
+
 const Genres = props => {
     const dispatch = useDispatch()
+    const classes = useStyles()
 
     const handleSelect = arr => {
         if( arr.length > 0 ) {
@@ -31,7 +39,13 @@ const Genres = props => {
                         getOptionLabel={option => option}
                         onChange={(e, value) => handleSelect(value)}
                         renderInput={params => 
-                            <TextField 
+                            <TextField
+                                InputProps={{
+                                    ...params.InputProps,
+                                    classes: {
+                                        notchedOutline: classes.notchedOutline
+                                    }
+                                }}
                                 {...params}
                                 variant="outlined"
                                 label="Select genres"
