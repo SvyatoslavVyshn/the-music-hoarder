@@ -30,16 +30,21 @@ const Message = ({ classes, danger, item, removeAlert }) => {
 
     return (
         <Slide direction="left" in={showMessage} mountOnEnter unmountOnExit>
-            <div className={ `alert-wrapper ${danger ? 'danger-alert' : 'success-alert'}` }>
-                <div className="alert alert-message">
-                    <div className="alert-content">
-                        <div className="alert-content-container">
+            <div className={ `mui-alert-wrapper ${danger ? 'mui-danger-alert' : 'mui-success-alert'}` }>
+                <div className="mui-alert mui-alert-message">
+                    <div className="mui-alert-content">
+                        <div className="mui-alert-content-container">
                             <p className="status-message">{item.title}</p>
-                            <p>{item.text}</p>
+                            <p>
+                                {item.text}
+                                <span>
+                                    {item.name && `[${item.name}]`}
+                                </span>
+                            </p>
                         </div>
                     </div>
 
-                    <div className="alert-actions">
+                    <div className="mui-alert-actions">
                         <IconButton
                             className={classes.button}
                             onClick={handleMessageRemove}
