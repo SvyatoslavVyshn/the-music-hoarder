@@ -25,8 +25,9 @@ const Genres = props => {
         if( arr.length > 0 ) {
             const transformedData = arr.map(item => item.toLowerCase())
             dispatch(selectGenre(transformedData))
+        } else {
+            dispatch(selectGenre([]))
         }
-        return null
     }
 
     return (
