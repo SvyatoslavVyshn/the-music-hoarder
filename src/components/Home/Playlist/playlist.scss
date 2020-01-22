@@ -1,11 +1,8 @@
-.playlist {
-    
-    margin-top: -80px;
-}
 
 .playlist-placeholder {
     height: 100%;
     text-align: center;
+    user-select: none;
     .playlist-caption {
         font-size: 1.3rem;
         color: #444;
@@ -14,4 +11,13 @@
             padding-bottom: 15px;
         }
     }
+}
+
+.loader-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
 }

@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add'
 
 const PlaylistItem = ({ track }) => {
     return (
-        <ListItem alignItems="flex-start" divider>
+        <ListItem alignItems="flex-start" divider button>
             <ListItemAvatar>
                 <Avatar alt={track.album.name} src={track.album.images[0].url}/>
             </ListItemAvatar>

@@ -3,16 +3,15 @@ import { useSelector } from 'react-redux'
 import List from '@material-ui/core/List'
 import Paper from '@material-ui/core/Paper'
 import MusicNoteIcon from '@material-ui/icons/MusicNote'
-
+import CircularProgress from '@material-ui/core/CircularProgress'
 import PlaylistItem from '../PlaylistItem'
-import Loading from '../../../common/Loading'
 
 import './playlist.scss'
 
 const Playlist = props => {
     const playlist = useSelector(state => state.playlist)
     return (
-        <Loading pending={playlist.pending} size={80}>
+        <div>
             {playlist.tracks.length > 0 && !playlist.pending &&
                 <Paper square elevation={3}>
                     <List>
@@ -31,7 +30,13 @@ const Playlist = props => {
                     </div>
                 </div> 
             }
-        </Loading>
+            {
+                playlist.pending && 
+                    <div className="loader-container">
+                        <CircularProgress size={80} color="primary" />
+                    </div>
+            }
+        </div>
     )
 }
 
