@@ -39,7 +39,7 @@ function Home (props) {
             </div>
             <div className="home-content">
                 <Container maxWidth="lg">
-                    <Playlist />
+                    <Playlist token={token} />
                 </Container>
             </div>
             {token && <Player token={token}/>}

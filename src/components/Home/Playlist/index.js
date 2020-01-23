@@ -1,21 +1,38 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import List from '@material-ui/core/List'
 import Paper from '@material-ui/core/Paper'
 import MusicNoteIcon from '@material-ui/icons/MusicNote'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PlaylistItem from '../PlaylistItem'
 
+import { playTrack } from '../../../store/player/actions'
+
 import './playlist.scss'
 
 const Playlist = props => {
     const playlist = useSelector(state => state.playlist)
+    const deviceId = useSelector(state => state.player.deviceId)
+    const dispatch = useDispatch()
+    
+    const selectTrack = (uri) => {
+        dispatch(playTrack(props.token, uri, deviceId))
+    }
+
     return (
         <div>
             {playlist.tracks.length > 0 && !playlist.pending &&
                 <Paper square elevation={3}>
                     <List>
-                        { playlist.tracks.map(track => <PlaylistItem key={track.id} track={track} /> ) }
+                        { playlist.tracks.map(track => 
+                            <PlaylistItem
+                                selectTrack={selectTrack}
+                                deviceId={deviceId}
+                                token={props.token}
+                                key={track.id}
+                                track={track} 
+                            /> 
+                        ) }
                     </List>
                 </Paper>
             }

@@ -5,6 +5,7 @@ export const HANDLE_STATE_CHANGE = 'HANDLE_STATE_CHANGE'
 export const TRANSFER_PLAYBACK = 'TRANSFER_PLAYBACK'
 export const SEEK_FOR_POSITION = 'SEEK_FOR_POSITION'
 export const CREATE_PLAYER = 'CREATE_PLAYER'
+export const PLAY_TRACK = 'PLAY_TRACK'
 
 export const createPlayer = (token) => {
     return dispatch => {
@@ -114,6 +115,25 @@ export const seekForPosition = (position, deviceId, token) => {
 
     return {
         type: SEEK_FOR_POSITION,
+        payload: promise
+    }
+}
+
+export const playTrack = (token, uri, deviceId) => {
+    const data = JSON.stringify({
+        "device_ids": [ deviceId ],
+        uris: [uri],
+        play: true
+    })
+    const promise = axios.put('https://api.spotify.com/v1/me/player/play', data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    })
+
+    return {
+        type: PLAY_TRACK,
         payload: promise
     }
 }

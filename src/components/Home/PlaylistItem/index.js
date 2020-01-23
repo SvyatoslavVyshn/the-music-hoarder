@@ -6,9 +6,14 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add'
 
-const PlaylistItem = ({ track }) => {
+const PlaylistItem = ({ track, token, deviceId, selectTrack }) => {
     return (
-        <ListItem alignItems="flex-start" divider button>
+        <ListItem 
+            alignItems="flex-start" 
+            divider 
+            button 
+            onClick={() => selectTrack(track.uri)}
+        >
             <ListItemAvatar>
                 <Avatar alt={track.album.name} src={track.album.images[0].url}/>
             </ListItemAvatar>
