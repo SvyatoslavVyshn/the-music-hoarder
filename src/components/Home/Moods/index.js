@@ -29,9 +29,9 @@ const Moods = props => {
                                 label={mood.label}
                                 min={parseFloat(mood.min)}
                                 max={parseFloat(mood.max)}
-                                value={[parseFloat(inputReducer.moodValues[mood.minCode]), parseFloat(inputReducer.moodValues[mood.maxCode])]}
+                                value={parseFloat(inputReducer.moodValues[mood.targetCode])}
                                 textValue={inputReducer.moodValues[mood.code]}
-                                name={`${mood.minCode} - ${mood.maxCode}`}
+                                name={mood.targetCode}
                                 step={mood.step}
                             />
                         </Grid>
