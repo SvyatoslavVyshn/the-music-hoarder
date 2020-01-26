@@ -9,8 +9,8 @@ import PauseIcon from '@material-ui/icons/Pause';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-import { truncate,  millisToMinutesAndSeconds, debounce } from '../../utils'
-import { seekForPosition, setPlayerState, onStateChange, createPlayer } from '../../store/player/actions'
+import { truncate,  millisToMinutesAndSeconds } from '../../utils'
+import { seekForPosition, onStateChange, createPlayer } from '../../store/player/actions'
 
 import './player.scss'
 
@@ -41,7 +41,6 @@ const Player = props => {
         }
     }, [playing, player, dispatch])
 
-
     const handlePositionChange = (value) => {
         // dispatch(setPlayerState({position: value}))
             
@@ -53,7 +52,7 @@ const Player = props => {
     return (
         <>
             {
-                playerState.deviceId && playerState.img &&
+                playerState && playerState.deviceId && playerState.img &&
                 <div className="player">
                     <Grid container spacing={1}>
                         <Grid item md={3}>
