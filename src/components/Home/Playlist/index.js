@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import PlaylistItem from '../PlaylistItem'
 
 import { playTrack } from '../../../store/player/actions'
+import { saveTrack } from '../../../store/playlist/actions'
 
 import './playlist.scss'
 
@@ -19,6 +20,10 @@ const Playlist = props => {
         dispatch(playTrack(props.token, uri, deviceId))
     }
 
+    const trackSave = (id) => {
+        dispatch(saveTrack(props.token, id))
+    }
+
     return (
         <div>
             {playlist.tracks.length > 0 && !playlist.pending &&
@@ -26,6 +31,7 @@ const Playlist = props => {
                     <List>
                         { playlist.tracks.map(track => 
                             <PlaylistItem
+                                trackSave={trackSave}
                                 selectTrack={selectTrack}
                                 deviceId={deviceId}
                                 token={props.token}
