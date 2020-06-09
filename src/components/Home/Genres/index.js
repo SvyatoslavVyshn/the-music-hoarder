@@ -1,5 +1,5 @@
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { withStyles } from "@material-ui/core/styles"
 import Grid from "@material-ui/core/Grid"
 import TextField from "@material-ui/core/TextField"
@@ -38,11 +38,11 @@ const CssTextField = withStyles({
 })(TextField)
 
 const Genres = (props) => {
+    const selectedGenres = useSelector((state) => state.inputs.selectedGenres)
     const dispatch = useDispatch()
     const handleSelect = (arr) => {
-        if (arr.length > 0) {
-            const transformedData = arr.map((item) => item.toLowerCase())
-            dispatch(selectGenre(transformedData))
+        if (arr && arr.length > 0) {
+            dispatch(selectGenre(arr))
         } else {
             dispatch(selectGenre([]))
         }
@@ -53,6 +53,7 @@ const Genres = (props) => {
             <Grid container spacing={5} justify="center">
                 <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                     <Autocomplete
+                        value={selectedGenres}
                         multiple
                         options={genresData}
                         getOptionLabel={(option) => option}
