@@ -109,7 +109,9 @@ const Player = (props) => {
                                         max={playerState.duration}
                                         step={0.01}
                                         value={
-                                            temporaryValue === 0
+                                            temporaryValue === 0 &&
+                                            !isSliderFocused &&
+                                            playerState.position !== 0
                                                 ? playerState.position
                                                 : temporaryValue
                                         }
