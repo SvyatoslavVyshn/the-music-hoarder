@@ -1,29 +1,47 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
+import React from "react"
+import { useDispatch } from "react-redux"
+import { withStyles } from "@material-ui/core/styles"
+import Grid from "@material-ui/core/Grid"
+import TextField from "@material-ui/core/TextField"
+import Autocomplete from "@material-ui/lab/Autocomplete"
 
-import { selectGenre } from '../../../store/inputs/actions'
+import { selectGenre } from "../../../store/inputs/actions"
 
-import genresData from '../../../data/genres'
+import genresData from "../../../data/genres"
 
-import './genres.scss'
+import "./genres.scss"
 
-const useStyles = makeStyles({
-    notchedOutline: {
-        borderColor: '#fff !important'
-    }
-})
+const CssTextField = withStyles({
+    root: {
+        "& label": {
+            color: "#fff",
+        },
+        "& label.Mui-focused": {
+            color: "#fff",
+        },
+        "& .MuiInput-underline:after": {
+            borderBottomColor: "#fff",
+        },
+        "& .MuiOutlinedInput-root": {
+            color: "#fff",
+            "& fieldset": {
+                borderColor: "#fff",
+            },
+            "&:hover fieldset": {
+                borderColor: "#fff",
+            },
+            "&.Mui-focused fieldset": {
+                borderColor: "#fff",
+            },
+        },
+    },
+})(TextField)
 
-const Genres = props => {
+const Genres = (props) => {
     const dispatch = useDispatch()
-    const classes = useStyles()
-
-    const handleSelect = arr => {
-        if( arr.length > 0 ) {
-            const transformedData = arr.map(item => item.toLowerCase())
+    const handleSelect = (arr) => {
+        if (arr.length > 0) {
+            const transformedData = arr.map((item) => item.toLowerCase())
             dispatch(selectGenre(transformedData))
         } else {
             dispatch(selectGenre([]))
@@ -37,22 +55,16 @@ const Genres = props => {
                     <Autocomplete
                         multiple
                         options={genresData}
-                        getOptionLabel={option => option}
+                        getOptionLabel={(option) => option}
                         onChange={(e, value) => handleSelect(value)}
-                        renderInput={params => 
-                            <TextField
-                                InputProps={{
-                                    ...params.InputProps,
-                                    classes: {
-                                        notchedOutline: classes.notchedOutline
-                                    }
-                                }}
+                        renderInput={(params) => (
+                            <CssTextField
                                 {...params}
                                 variant="outlined"
                                 label="Select genres"
                                 fullWidth
-                            />  
-                        }
+                            />
+                        )}
                     />
                 </Grid>
             </Grid>
