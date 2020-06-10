@@ -96,6 +96,7 @@
 @media screen and (max-width: 1440px) {
     .login {
         .login-content {
+            height: 80vh;
             flex-direction: column;
 
             .auth-section {
@@ -117,7 +118,7 @@
     .login {
         .login-content {
             height: 80vh;
-            width: 80vw;
+            width: 70vw;
         }
     }
 }
