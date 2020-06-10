@@ -24,7 +24,7 @@ function Home(props) {
 
     const randomizeGenres = () => {
         var arr = []
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < Math.random() * 5; i++) {
             var r = Math.floor(Math.random() * 125) + 1
             if (arr.indexOf(genresData[r]) === -1) {
                 arr.push(genresData[r])
