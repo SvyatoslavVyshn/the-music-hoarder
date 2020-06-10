@@ -8,7 +8,7 @@ function Login() {
             <div className="login-content">
                 <div className="auth-section">
                     <h2>Welcome</h2>
-                    <p>To The Music Hoarder!</p>
+                    <p>To The Music Hoarder</p>
                     <a
                         href="http://localhost:8888/login"
                         className="login-button"
