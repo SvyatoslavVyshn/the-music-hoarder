@@ -1,55 +1,93 @@
 .login {
     min-height: 100vh;
     width: 100vw;
-    background-image: linear-gradient(to right, rgba(192, 108, 132, 0.3), rgba(108, 91, 123, 0.3), rgba(53, 92, 125, 0.3)), url('../../images/kristopher-roller-zepnJQycr4U-unsplash.jpg');
-    background-size: cover;
+    background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
 
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    .login-content {
-        margin-left: 60px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #fff;
-        
-        .header {
-            font-size: 3.5rem;
-            letter-spacing: 1px;
-            word-spacing: 2px;
-            font-weight: lighter;
-            padding: 15px 0;
+    font-family: "Ubuntu";
 
-            &:after {
-                height: 2px;
-                width: 80%;
-                background-color: #fff;
+    .login-content {
+        height: 60vh;
+        width: 60vw;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+            0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: row;
+
+        .auth-section {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            height: 100%;
+            padding: 20px;
+            width: 40%;
+            background-image: url("../../images/patrick-carr-pAoo1Rs1Yy8-unsplash.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            letter-spacing: 3px;
+            word-spacing: 3px;
+
+            h2 {
+                font-size: 32px;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+                font-weight: lighter;
+            }
+
+            p {
+                font-size: 20px;
+                text-transform: uppercase;
+                margin-bottom: 45px;
+            }
+
+            a {
+                padding: 10px 20px;
+                border: 2px solid #fff;
+                color: #fff;
+                text-decoration: none;
+                justify-self: flex-end;
+                font-size: 16px;
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    background-color: #fff;
+                    color: #000;
+                }
             }
         }
 
-        .info {
-            font-size: 1.5rem;
-            padding-bottom: 25px;
-            letter-spacing: 1px;
+        .explain-section {
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            padding: 10px 10px 10px 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
 
-        }
+            .feature-list {
+                list-style: circle;
+                width: 100%;
 
-        .login-button {
-            border: 2px solid #fff;
-            background-color: transparent;
-            color: #fff;
-            padding: 8px 20px;
-            font-size: 1.2rem;
-            font-weight: lighter;
-            text-decoration: none;
-            cursor: pointer;
-            transition: .2s ease-in-out;
-
-            &:hover {
-                background-color: #fff;
-                color: #000;
+                .feature-item {
+                    letter-spacing: 1px;
+                    word-spacing: 2px;
+                    color: #444;
+                    font-size: 16px;
+                    font-weight: lighter;
+                    padding: 15px;
+                }
             }
         }
     }
