@@ -1,7 +1,10 @@
 import React from "react"
-import ButtonGroup from "@material-ui/core/ButtonGroup"
+import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
 import Container from "@material-ui/core/Container"
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
 import { useSelector, useDispatch } from "react-redux"
 
 import Moods from "./Moods"
@@ -35,35 +38,50 @@ function Home(props) {
 
     return (
         <div className="home">
-            <div className="header">
-                <div className="caption">
-                    <Moods />
-                    <Genres />
-                    <ButtonGroup variant="contained" color="secondary">
-                        <Button
-                            onClick={() =>
-                                dispatch(
-                                    getPlaylist(
-                                        token,
-                                        inputs.moodValues,
-                                        inputs.selectedGenres
-                                    )
-                                )
-                            }
-                        >
-                            Search
-                        </Button>
-                        <Button onClick={randomizeGenres}>
-                            Radnomize Genres
-                        </Button>
-                    </ButtonGroup>
-                </div>
+            {/* <Container maxWidth="lg"> */}
+            <div className="home-container">
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12} md={4} lg={3}>
+                        <Card style={{ marginBottom: "20px" }}>
+                            <CardContent>
+                                <Moods />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={8} lg={9}>
+                        <Card style={{ marginBottom: "20px" }}>
+                            <CardContent>
+                                <Genres />
+                            </CardContent>
+                            <CardActions>
+                                <Button
+                                    onClick={() =>
+                                        dispatch(
+                                            getPlaylist(
+                                                token,
+                                                inputs.moodValues,
+                                                inputs.selectedGenres
+                                            )
+                                        )
+                                    }
+                                >
+                                    Search
+                                </Button>
+                                <Button onClick={randomizeGenres}>
+                                    Radnomize Genres
+                                </Button>
+                            </CardActions>
+                        </Card>
+
+                        <Card>
+                            <CardContent>
+                                <Playlist token={token} />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
             </div>
-            <div className="home-content">
-                <Container maxWidth="lg">
-                    <Playlist token={token} />
-                </Container>
-            </div>
+            {/* </Container> */}
             {token && <Player token={token} />}
         </div>
     )

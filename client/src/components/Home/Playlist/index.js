@@ -28,22 +28,20 @@ const Playlist = (props) => {
     }
 
     return (
-        <div>
+        <div className="playlist-container">
             {playlist.tracks.length > 0 && !playlist.pending && (
-                <Paper square elevation={3}>
-                    <List>
-                        {playlist.tracks &&
-                            playlist.tracks.map((track) => (
-                                <PlaylistItem
-                                    trackSave={trackSave}
-                                    selectTrack={selectTrack}
-                                    token={props.token}
-                                    key={track.id}
-                                    track={track}
-                                />
-                            ))}
-                    </List>
-                </Paper>
+                <List>
+                    {playlist.tracks &&
+                        playlist.tracks.map((track) => (
+                            <PlaylistItem
+                                trackSave={trackSave}
+                                selectTrack={selectTrack}
+                                token={props.token}
+                                key={track.id}
+                                track={track}
+                            />
+                        ))}
+                </List>
             )}
             {playlist.tracks.length === 0 && !playlist.pending && (
                 <div className="playlist-placeholder">
@@ -51,10 +49,7 @@ const Playlist = (props) => {
                         <div className="icon-container">
                             <MusicNoteIcon fontSize="large" />
                         </div>
-                        <p>Here is no music yet.</p>
-                        <p>
-                            Use search functionality above to see tracks here!
-                        </p>
+                        <p>You will see searched tracks here.</p>
                     </div>
                 </div>
             )}

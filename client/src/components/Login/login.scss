@@ -1,6 +1,5 @@
 .login {
     min-height: 100vh;
-    width: 100vw;
     background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
 
     display: flex;
@@ -96,7 +95,7 @@
 @media screen and (max-width: 1440px) {
     .login {
         .login-content {
-            height: 80vh;
+            height: 90vh;
             flex-direction: column;
 
             .auth-section {
@@ -117,7 +116,7 @@
 @media screen and (max-width: 790px) {
     .login {
         .login-content {
-            height: 80vh;
+            height: 90vh;
             width: 70vw;
         }
     }

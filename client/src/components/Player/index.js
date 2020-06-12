@@ -105,6 +105,7 @@ const Player = (props) => {
                                     </p>
 
                                     <Slider
+                                        color="secondary"
                                         min={0}
                                         max={playerState.duration}
                                         step={0.01}
