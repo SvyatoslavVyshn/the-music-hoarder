@@ -55,6 +55,7 @@ function Home(props) {
                             </CardContent>
                             <CardActions>
                                 <Button
+                                    color="primary"
                                     onClick={() =>
                                         dispatch(
                                             getPlaylist(
@@ -67,7 +68,10 @@ function Home(props) {
                                 >
                                     Search
                                 </Button>
-                                <Button onClick={randomizeGenres}>
+                                <Button
+                                    color="primary"
+                                    onClick={randomizeGenres}
+                                >
                                     Radnomize Genres
                                 </Button>
                             </CardActions>

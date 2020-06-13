@@ -20,18 +20,17 @@ export const login = () => {
     return (dispatch) => {
         let params
 
+        console.log(getHashParams())
+
         if (getHashParams().access_token && getHashParams().expires_in) {
             params = getHashParams()
             const expirationDate = new Date(
-                new Date().getTime() + parseInt(params.expires_in) * 1000
+                new Date().getTime() + parseInt(params.expires_in)
             )
             console.log(expirationDate)
             saveDataToStorage(params.access_token, expirationDate)
             dispatch(
-                authenticate(
-                    params.access_token,
-                    parseInt(params.expires_in) * 1000
-                )
+                authenticate(params.access_token, parseInt(params.expires_in))
             )
         } else {
             params = JSON.parse(localStorage.getItem("params"))

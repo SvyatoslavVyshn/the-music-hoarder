@@ -18,7 +18,11 @@ const PlaylistItem = ({ track, selectTrack, trackSave }) => {
             <ListItemAvatar onClick={() => selectTrack(track.uri)}>
                 <Avatar
                     alt={track.album.name}
-                    src={track.album.images[0].url}
+                    src={
+                        track.album.images && track.album.images.length >= 1
+                            ? track.album.images[0].url
+                            : ""
+                    }
                 />
             </ListItemAvatar>
             <ListItemText

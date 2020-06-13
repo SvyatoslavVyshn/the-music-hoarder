@@ -9,10 +9,7 @@ function Login() {
                 <div className="auth-section">
                     <h2>Welcome</h2>
                     <p>To The Music Hoarder</p>
-                    <a
-                        href="http://localhost:8888/login"
-                        className="login-button"
-                    >
+                    <a href="/auth/login" className="login-button">
                         Login with Spotify
                     </a>
                 </div>
