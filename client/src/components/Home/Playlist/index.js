@@ -18,9 +18,8 @@ const Playlist = (props) => {
 
     const selectTrack = (uri) => {
         const uris = playlist.tracks.map((track) => track.uri)
-        const fromIndex = uris.findIndex((item) => item === uri)
-        const playableUris = uris.slice(fromIndex, uris.length + 1)
-        dispatch(playTrack(props.token, playableUris, deviceId))
+        const uriOffset = { uri }
+        dispatch(playTrack(props.token, uris, uriOffset, deviceId))
     }
 
     const trackSave = (id) => {

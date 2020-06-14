@@ -134,9 +134,10 @@ export const seekForPosition = (position, deviceId, token) => {
     }
 }
 
-export const playTrack = (token, uris, deviceId) => {
+export const playTrack = (token, uris, offset, deviceId) => {
     const data = JSON.stringify({
         device_ids: [deviceId],
+        offset,
         uris: uris,
         play: true,
     })
