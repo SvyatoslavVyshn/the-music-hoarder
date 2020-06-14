@@ -28,13 +28,18 @@ const PlaylistItem = ({
         product === "premium" ? (
             track.artists.map((artist) => artist.name).join(", ")
         ) : (
-            <a
-                target="_blank"
-                className="play-on"
-                href={track.external_urls.spotify}
-            >
-                Listen on Spotify
-            </a>
+            <span>
+                {track.artists.map((artist) => artist.name).join(", ")}
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="play-on"
+                    href={track.external_urls.spotify}
+                    style={{ marginLeft: 10 }}
+                >
+                    Listen on Spotify
+                </a>
+            </span>
         )
 
     return (

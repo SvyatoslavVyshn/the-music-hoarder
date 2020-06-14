@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import Slide from '@material-ui/core/Slide'
-import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
-import Clear from '@material-ui/icons/Clear'
+import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import Slide from "@material-ui/core/Slide"
+import IconButton from "@material-ui/core/IconButton"
+import { withStyles } from "@material-ui/core/styles"
+import Clear from "@material-ui/icons/Clear"
+
+import ProgressBar from "../ProgressBar"
+import { PromiseProvider } from "mongoose"
 
 const styles = () => ({
     button: {
-        color: '#fff'
-    }
+        color: "#fff",
+    },
 })
 
 const Message = ({ classes, danger, item, removeAlert }) => {
     const [showMessage, setShowMessage] = useState(true)
     const dispatch = useDispatch()
 
-
     useEffect(() => {
-        if(!showMessage) {
+        if (!showMessage) {
             setTimeout(() => {
                 dispatch(removeAlert(item.id))
             }, 500)
@@ -30,16 +32,18 @@ const Message = ({ classes, danger, item, removeAlert }) => {
 
     return (
         <Slide direction="left" in={showMessage} mountOnEnter unmountOnExit>
-            <div className={ `mui-alert-wrapper ${danger ? 'mui-danger-alert' : 'mui-success-alert'}` }>
+            <div
+                className={`mui-alert-wrapper ${
+                    danger ? "mui-danger-alert" : "mui-success-alert"
+                }`}
+            >
                 <div className="mui-alert mui-alert-message">
                     <div className="mui-alert-content">
                         <div className="mui-alert-content-container">
                             <p className="status-message">{item.title}</p>
                             <p>
                                 {item.text}
-                                <span>
-                                    {item.name && `[${item.name}]`}
-                                </span>
+                                <span>{item.name && `[${item.name}]`}</span>
                             </p>
                         </div>
                     </div>
@@ -52,11 +56,18 @@ const Message = ({ classes, danger, item, removeAlert }) => {
                             <Clear />
                         </IconButton>
                     </div>
-
                 </div>
+
+                {item.timeout && (
+                    <ProgressBar
+                        duration={2000}
+                        interval={50}
+                        onFinish={handleMessageRemove}
+                    />
+                )}
             </div>
         </Slide>
     )
 }
 
-export default withStyles(styles) (Message)
+export default withStyles(styles)(Message)

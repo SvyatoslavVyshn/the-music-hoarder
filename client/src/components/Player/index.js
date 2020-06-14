@@ -66,8 +66,6 @@ const Player = (props) => {
         dispatch(seekForPosition(value, playerState.deviceId, token))
     }
 
-    console.log(playerState)
-
     return (
         <>
             {user &&

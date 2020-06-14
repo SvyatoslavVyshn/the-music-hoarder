@@ -14,7 +14,7 @@ import Player from "../Player"
 import { getPlaylist } from "../../store/playlist/actions"
 import { selectGenre } from "../../store/inputs/actions"
 import { getUser } from "../../store/auth/actions"
-import { addAlert } from "../../store/alerts/actions"
+// import { addAlert } from "../../store/alerts/actions"
 
 import genresData from "../../data/genres"
 
@@ -25,8 +25,6 @@ function Home(props) {
     const inputs = useSelector((state) => state.inputs)
     const { access_token, user } = useSelector((state) => state.auth)
 
-    console.log(user)
-
     useEffect(() => {
         // dispatch(
         //     addAlert({
@@ -36,7 +34,7 @@ function Home(props) {
         //     })
         // )
         dispatch(getUser())
-    }, [])
+    }, [dispatch])
 
     const randomizeGenres = () => {
         var arr = []

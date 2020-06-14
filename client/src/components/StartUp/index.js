@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { Route, Switch, Redirect, withRouter } from "react-router-dom"
 
-import Drawer from "@material-ui/core/Drawer"
-
-import Moods from "../Home/Moods"
-
 import { login, authenticate, logout } from "../../store/auth/actions"
-// import { parseISOString } from '../../utils'
 
 import Login from "../Login"
 import Home from "../Home"
 import Navbar from "../Navbar"
 
 const StartUp = (props) => {
-    const [isDrawerOpen, setIsdraweOpen] = useState(false)
     const { history } = props
     const params = localStorage.getItem("params")
     const dispatch = useDispatch()
@@ -56,24 +50,7 @@ const StartUp = (props) => {
 
     return (
         <div>
-            <Navbar
-                isAuth={!!params}
-                logout={handleLogout}
-                openDrawer={() => setIsdraweOpen((prevState) => !prevState)}
-            />
-            {/* <Drawer
-                PaperProps={{
-                    style: {
-                        width: "20%",
-                        padding: "20px",
-                    },
-                }}
-                open={isDrawerOpen}
-                onClose={() => setIsdraweOpen((prevState) => !prevState)}
-                anchor="left"
-            >
-                <Moods />
-            </Drawer> */}
+            <Navbar isAuth={!!params} logout={handleLogout} />
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/home" component={Home} />
