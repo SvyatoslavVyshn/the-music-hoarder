@@ -20,7 +20,6 @@ module.exports = (app) => {
                 "user-library-read",
                 "user-library-modify",
                 "playlist-modify-public",
-                "playlist-modify-private",
             ],
         })
     )
