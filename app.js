@@ -9,7 +9,10 @@ require("./models/User")
 require("./services/passport")
 
 mongoose.Promise = global.Promise
-mongoose.connect(keys.mongoURI)
+mongoose.connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 
 const app = express()
 
