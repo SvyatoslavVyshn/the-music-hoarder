@@ -1,6 +1,5 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import Grid from "@material-ui/core/Grid"
 import Slider from "../../../common/Slider"
 
 import moods from "../../../data/moods"
@@ -21,6 +20,7 @@ const Moods = (props) => {
         <div className="moods">
             {moods.map((mood) => (
                 <Slider
+                    key={mood.label}
                     title={mood.title}
                     onChange={handleMoodChange}
                     label={mood.label}

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import List from "@material-ui/core/List"
 import Paper from "@material-ui/core/Paper"
@@ -12,8 +12,14 @@ import { saveTrack } from "../../../store/playlist/actions"
 import "./playlist.scss"
 
 const Playlist = (props) => {
+    const [playingUrl, setPlayingUrl] = useState("")
+    const [stateAudio, setStateAudio] = useState(null)
+    const [playing, setPlaying] = useState(false)
+
     const playlist = useSelector((state) => state.playlist)
     const deviceId = useSelector((state) => state.player.deviceId)
+    const { product } = useSelector((state) => state.auth.user)
+
     const dispatch = useDispatch()
 
     const selectTrack = (uri) => {
@@ -26,6 +32,31 @@ const Playlist = (props) => {
         dispatch(saveTrack(props.token, id))
     }
 
+    // const playAudio = (previewUrl) => {
+    //     if (previewUrl) {
+    //         let audio = new Audio(previewUrl)
+    //         if (!playing) {
+    //             audio.play()
+    //             setPlaying(true)
+    //             setPlayingUrl(previewUrl)
+    //             setStateAudio(audio)
+    //         } else {
+    //             if (playingUrl === previewUrl) {
+    //                 stateAudio.pause()
+    //                 setPlaying(false)
+    //             } else {
+    //                 stateAudio.pause()
+    //                 stateAudio.play()
+    //                 setPlayingUrl(previewUrl)
+    //                 setPlaying(true)
+    //                 setStateAudio(audio)
+    //             }
+    //         }
+    //     } else {
+    //         console.log("Sorry, demo for this song is not available")
+    //     }
+    // }
+
     return (
         <div className="playlist-container">
             {playlist.tracks.length > 0 && !playlist.pending && (
@@ -33,6 +64,10 @@ const Playlist = (props) => {
                     {playlist.tracks &&
                         playlist.tracks.map((track) => (
                             <PlaylistItem
+                                // playAudio={playAudio}
+                                product={product}
+                                // playing={playing}
+                                // playingUrl={playingUrl}
                                 trackSave={trackSave}
                                 selectTrack={selectTrack}
                                 token={props.token}

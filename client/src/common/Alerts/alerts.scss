@@ -2,26 +2,22 @@
     pointer-events: none;
     bottom: 0;
     position: fixed;
-    z-index: 10;
+    z-index: 11;
     width: 100%;
 }
-
- 
 
 .messages-list {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
 
-    .status-message{
+    .status-message {
         max-width: 100%;
         font-size: 1.2rem;
     }
 }
 
- 
-
-.mui-alert-wrapper{
+.mui-alert-wrapper {
     pointer-events: visible;
     margin: 8px 0;
     color: #fff;
@@ -30,33 +26,25 @@
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.01071em;
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 18px 0px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     box-sizing: border-box;
     width: 100%;
-
 }
 
- 
-
 @media (min-width: 960px) {
-    .mui-alert-wrapper{
+    .mui-alert-wrapper {
         width: 500px;
     }
 }
-
- 
 
 @media (min-width: 1200px) {
     .messages-list-outer-container .container {
         margin-right: 20px;
     }
-
- 
-
 }
-
- 
 
 .mui-alert {
     display: flex;
@@ -64,13 +52,9 @@
     align-items: center;
 }
 
- 
-
 .mui-alert-content {
     padding: 8px 0;
-} 
-
- 
+}
 
 .mui-alert-content-container {
     display: flex;
@@ -78,8 +62,6 @@
     flex-wrap: wrap;
     flex-direction: column;
 }
-
- 
 
 .mui-alert-actions {
     display: flex;
@@ -89,26 +71,18 @@
     margin-right: -8px;
 }
 
- 
-
 .mui-danger-alert {
-    background-color: #d32f2f
+    background-color: #d32f2f;
 }
-
- 
 
 .mui-success-alert {
     background-color: #43a047;
 }
 
- 
-
 .mui-alert-close {
     cursor: pointer;
 }
 
- 
-
-.indicator-icon{
+.indicator-icon {
     margin: 0 5px;
 }

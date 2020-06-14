@@ -1,0 +1,38 @@
+play-track {
+    &:hover {
+        color: #c51162 !important;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.play-on {
+    font-size: 1rem !important;
+    color: inherit !important;
+
+    &:hover {
+        color: #c51162 !important;
+        text-decoration: underline;
+    }
+}
+
+.non-premium {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+    min-width: 40%;
+
+    & > a {
+        width: 100%;
+        min-width: 50%;
+        overflow: hidden;
+    }
+
+    & > p {
+        width: 100%;
+        min-width: 50%;
+    }
+}

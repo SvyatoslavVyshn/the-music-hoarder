@@ -1,13 +1,15 @@
+import axios from "axios"
 import { getHashParams } from "../../utils"
 
 export const AUTHENTICATE = "AUTHENTICATE"
 export const LOGOUT = "LOGOUT"
+export const GET_NEW_ACCESS_TOKEN = "GET_NEW_ACCESS_TOKEN"
+export const GET_CURRENT_USER = "GET_CURRENT_USER"
 
 let timer
 
 export const authenticate = (access_token, expiryTime) => {
     return (dispatch) => {
-        console.log(expiryTime, "expTime")
         dispatch(setLogoutTimer(expiryTime))
         dispatch({
             type: AUTHENTICATE,
@@ -20,14 +22,11 @@ export const login = () => {
     return (dispatch) => {
         let params
 
-        console.log(getHashParams())
-
         if (getHashParams().access_token && getHashParams().expires_in) {
             params = getHashParams()
             const expirationDate = new Date(
                 new Date().getTime() + parseInt(params.expires_in)
             )
-            console.log(expirationDate)
             saveDataToStorage(params.access_token, expirationDate)
             dispatch(
                 authenticate(params.access_token, parseInt(params.expires_in))
@@ -65,17 +64,14 @@ const clearLogoutTimer = () => {
 }
 
 const setLogoutTimer = (expirationTime) => {
-    console.log(expirationTime, "logoutTime")
     return (dispatch) => {
         timer = setTimeout(() => {
-            console.log(expirationTime, "timeout")
-            dispatch(logout())
+            dispatch(getNewToken())
         }, expirationTime)
     }
 }
 
 const saveDataToStorage = (access_token, expirationDate) => {
-    console.log(expirationDate)
     localStorage.setItem(
         "params",
         JSON.stringify({
@@ -83,4 +79,22 @@ const saveDataToStorage = (access_token, expirationDate) => {
             expires_in: expirationDate.toLocaleString(),
         })
     )
+}
+
+export const getNewToken = () => {
+    const promise = axios.get("/auth/refresh-token")
+
+    return {
+        type: GET_NEW_ACCESS_TOKEN,
+        payload: promise,
+    }
+}
+
+export const getUser = () => {
+    const promise = axios.get("/api/current_user")
+
+    return {
+        type: GET_CURRENT_USER,
+        payload: promise,
+    }
 }

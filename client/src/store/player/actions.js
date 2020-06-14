@@ -36,16 +36,13 @@ export const createPlayer = (token) => {
             })
 
             player.addListener("ready", ({ device_id }) => {
-                console.log("Ready with Device ID", device_id)
                 dispatch(transferPlaybackHere(device_id, token))
 
                 dispatch(setPlayerState({ deviceId: device_id }))
             })
 
             // Not Ready
-            player.addListener("not_ready", ({ device_id }) => {
-                console.log("Device ID has gone offline", device_id)
-            })
+            player.addListener("not_ready", ({ device_id }) => {})
 
             // Connect to the player!
             player.connect()
@@ -66,26 +63,28 @@ export const setPlayerState = (obj) => {
 }
 
 export const onStateChange = (state) => {
-    const { current_track: currentTrack } = state.track_window
-    const { duration, position } = state
-    const trackName = currentTrack.name
-    const albumName = currentTrack.album.name
-    const artistName = currentTrack.artists
-        .map((artist) => artist.name)
-        .join(", ")
-    const playing = !state.paused
-    const img = currentTrack.album.images[0].url
-    return {
-        type: HANDLE_STATE_CHANGE,
-        payload: {
-            position,
-            duration,
-            trackName,
-            albumName,
-            artistName,
-            playing,
-            img,
-        },
+    if (state) {
+        const { current_track: currentTrack } = state.track_window
+        const { duration, position } = state
+        const trackName = currentTrack.name
+        const albumName = currentTrack.album.name
+        const artistName = currentTrack.artists
+            .map((artist) => artist.name)
+            .join(", ")
+        const playing = !state.paused
+        const img = currentTrack.album.images[0].url
+        return {
+            type: HANDLE_STATE_CHANGE,
+            payload: {
+                position,
+                duration,
+                trackName,
+                albumName,
+                artistName,
+                playing,
+                img,
+            },
+        }
     }
 }
 

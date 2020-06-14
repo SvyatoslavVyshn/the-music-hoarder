@@ -1,7 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
-import Container from "@material-ui/core/Container"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
 import CardContent from "@material-ui/core/CardContent"
@@ -14,7 +13,8 @@ import Player from "../Player"
 
 import { getPlaylist } from "../../store/playlist/actions"
 import { selectGenre } from "../../store/inputs/actions"
-// import { login } from '../../store/auth/actions'
+import { getUser } from "../../store/auth/actions"
+import { addAlert } from "../../store/alerts/actions"
 
 import genresData from "../../data/genres"
 
@@ -23,7 +23,20 @@ import "./home.scss"
 function Home(props) {
     const dispatch = useDispatch()
     const inputs = useSelector((state) => state.inputs)
-    const token = useSelector((state) => state.auth.access_token)
+    const { access_token, user } = useSelector((state) => state.auth)
+
+    console.log(user)
+
+    useEffect(() => {
+        // dispatch(
+        //     addAlert({
+        //         title: "Hello",
+        //         text: "Hello",
+        //         error: false,
+        //     })
+        // )
+        dispatch(getUser())
+    }, [])
 
     const randomizeGenres = () => {
         var arr = []
@@ -38,7 +51,6 @@ function Home(props) {
 
     return (
         <div className="home">
-            {/* <Container maxWidth="lg"> */}
             <div className="home-container">
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={4} lg={3}>
@@ -56,10 +68,14 @@ function Home(props) {
                             <CardActions>
                                 <Button
                                     color="primary"
+                                    disabled={
+                                        inputs.selectedGenres.length < 1 ||
+                                        inputs.selectedGenres.length > 5
+                                    }
                                     onClick={() =>
                                         dispatch(
                                             getPlaylist(
-                                                token,
+                                                access_token,
                                                 inputs.moodValues,
                                                 inputs.selectedGenres
                                             )
@@ -79,14 +95,14 @@ function Home(props) {
 
                         <Card>
                             <CardContent>
-                                <Playlist token={token} />
+                                <Playlist token={access_token} />
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
             </div>
-            {/* </Container> */}
-            {token && <Player token={token} />}
+
+            {access_token && <Player user={user} token={access_token} />}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import TextField from "@material-ui/core/TextField"
 import Autocomplete from "@material-ui/lab/Autocomplete"
@@ -36,6 +36,8 @@ import "./genres.scss"
 // })(TextField)
 
 const Genres = (props) => {
+    const [touched, setTouched] = useState(false)
+
     const selectedGenres = useSelector((state) => state.inputs.selectedGenres)
     const dispatch = useDispatch()
     const handleSelect = (arr) => {
@@ -54,6 +56,7 @@ const Genres = (props) => {
                 options={genresData}
                 getOptionLabel={(option) => option}
                 onChange={(e, value) => handleSelect(value)}
+                onFocus={() => setTouched(true)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -63,6 +66,12 @@ const Genres = (props) => {
                     />
                 )}
             />
+            {touched && selectedGenres.length < 1 && (
+                <p className="error-text">You must provide minimum 1 genre!</p>
+            )}
+            {touched && selectedGenres.length > 5 && (
+                <p className="error-text">You can provide maximum 5 genres!</p>
+            )}
         </div>
     )
 }

@@ -6,7 +6,37 @@ import Avatar from "@material-ui/core/Avatar"
 import IconButton from "@material-ui/core/IconButton"
 import AddIcon from "@material-ui/icons/Add"
 
-const PlaylistItem = ({ track, selectTrack, trackSave }) => {
+const PlaylistItem = ({
+    track,
+    selectTrack,
+    trackSave,
+    // playAudio,
+    product,
+    // playingUrl,
+    // playing,
+}) => {
+    const handlePlay = () => {
+        if (product === "premium") {
+            selectTrack(track.uri)
+        } else {
+            return
+            // playAudio(track.preview_url)
+        }
+    }
+
+    const secondaryText =
+        product === "premium" ? (
+            track.artists.map((artist) => artist.name).join(", ")
+        ) : (
+            <a
+                target="_blank"
+                className="play-on"
+                href={track.external_urls.spotify}
+            >
+                Listen on Spotify
+            </a>
+        )
+
     return (
         <ListItem
             alignItems="flex-start"
@@ -15,7 +45,7 @@ const PlaylistItem = ({ track, selectTrack, trackSave }) => {
                 cursor: "pointer",
             }}
         >
-            <ListItemAvatar onClick={() => selectTrack(track.uri)}>
+            <ListItemAvatar onClick={handlePlay}>
                 <Avatar
                     alt={track.album.name}
                     src={
@@ -25,13 +55,13 @@ const PlaylistItem = ({ track, selectTrack, trackSave }) => {
                     }
                 />
             </ListItemAvatar>
+
             <ListItemText
-                onClick={() => selectTrack(track.uri)}
+                onClick={handlePlay}
                 primary={track.name}
-                secondary={track.artists
-                    .map((artist) => artist.name)
-                    .join(", ")}
+                secondary={secondaryText}
             />
+
             <IconButton
                 aria-label="More"
                 aria-owns="add-btn"
