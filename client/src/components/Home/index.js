@@ -13,7 +13,7 @@ import Player from "../Player"
 
 import { getPlaylist } from "../../store/playlist/actions"
 import { selectGenre } from "../../store/inputs/actions"
-import { getUser } from "../../store/auth/actions"
+import { getUser, getNewToken } from "../../store/auth/actions"
 // import { addAlert } from "../../store/alerts/actions"
 
 import genresData from "../../data/genres"
@@ -87,6 +87,9 @@ function Home(props) {
                                     onClick={randomizeGenres}
                                 >
                                     Radnomize Genres
+                                </Button>
+                                <Button onClick={() => dispatch(getNewToken())}>
+                                    New Token
                                 </Button>
                             </CardActions>
                         </Card>

@@ -5,6 +5,8 @@ const keys = require("../config/keys")
 const mongoose = require("mongoose")
 const User = mongoose.model("users")
 
+const isAuth = require("../middlewares/isAuth")
+
 module.exports = (app) => {
     app.get(
         "/auth/login",
@@ -37,7 +39,7 @@ module.exports = (app) => {
         }
     )
 
-    app.get("/auth/refresh-token", async (req, res, next) => {
+    app.get("/auth/refresh-token", isAuth, async (req, res, next) => {
         const buff = new Buffer.from(
             `${keys.spotifyClientID}:${keys.spotifyClientSecret}`
         )
@@ -82,12 +84,12 @@ module.exports = (app) => {
         }
     })
 
-    // app.get('/api/logout', (req, res) => {
-    //   req.logout();
-    //   res.redirect('/');
-    // });
+    app.get("/api/logout", (req, res) => {
+        req.logout()
+        res.redirect("/")
+    })
 
-    app.get("/api/current_user", (req, res) => {
+    app.get("/api/current_user", isAuth, (req, res) => {
         res.send(req.user.profile)
     })
 }

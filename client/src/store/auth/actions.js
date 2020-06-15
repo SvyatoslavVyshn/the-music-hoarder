@@ -3,7 +3,6 @@ import { getHashParams } from "../../utils"
 
 export const AUTHENTICATE = "AUTHENTICATE"
 export const LOGOUT = "LOGOUT"
-export const GET_NEW_ACCESS_TOKEN = "GET_NEW_ACCESS_TOKEN"
 export const GET_CURRENT_USER = "GET_CURRENT_USER"
 
 let timer
@@ -45,15 +44,17 @@ export const login = () => {
 export const logout = () => {
     clearLogoutTimer()
     localStorage.removeItem("params")
-    const url = "https://www.spotify.com/logout/"
-    const spotifyLogoutWindow = global.window.open(
-        url,
-        "Spotify Logout",
-        "width=700,height=500,top=40,left=40"
-    )
-    setTimeout(() => spotifyLogoutWindow.close(), 1000)
+    const promise = axios.get("/api/logout")
+    // const url = "https://www.spotify.com/logout/"
+    // const spotifyLogoutWindow = global.window.open(
+    //     url,
+    //     "Spotify Logout",
+    //     "width=700,height=500,top=40,left=40"
+    // )
+    // setTimeout(() => spotifyLogoutWindow.close(), 1000)
     return {
         type: LOGOUT,
+        payload: promise,
     }
 }
 
@@ -82,11 +83,13 @@ const saveDataToStorage = (access_token, expirationDate) => {
 }
 
 export const getNewToken = () => {
-    const promise = axios.get("/auth/refresh-token")
+    return async (dispatch) => {
+        const res = await axios.get("/auth/refresh-token")
+        const expirationDate = new Date(new Date().getTime() + 3600000)
 
-    return {
-        type: GET_NEW_ACCESS_TOKEN,
-        payload: promise,
+        clearLogoutTimer()
+        saveDataToStorage(res.data.access_token, expirationDate)
+        dispatch(authenticate(res.data.access_token, 3600000))
     }
 }
 
