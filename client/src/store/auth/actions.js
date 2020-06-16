@@ -68,7 +68,7 @@ const setLogoutTimer = (expirationTime) => {
     return (dispatch) => {
         timer = setTimeout(() => {
             dispatch(getNewToken())
-        }, expirationTime)
+        }, expirationTime - 3000)
     }
 }
 
