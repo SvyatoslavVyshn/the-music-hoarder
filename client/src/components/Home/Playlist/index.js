@@ -35,7 +35,7 @@ const Playlist = (props) => {
             )
             dispatch(clearFlags())
         }
-    }, [addAlert, dispatch, clearFlags, playlist.flags.addTrackSuccess])
+    }, [dispatch, playlist.flags.addTrackSuccess])
 
     const selectTrack = (uri) => {
         const uris = playlist.tracks.map((track) => track.uri)

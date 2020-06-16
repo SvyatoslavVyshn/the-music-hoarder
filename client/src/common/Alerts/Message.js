@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles"
 import Clear from "@material-ui/icons/Clear"
 
 import ProgressBar from "../ProgressBar"
-import { PromiseProvider } from "mongoose"
 
 const styles = () => ({
     button: {

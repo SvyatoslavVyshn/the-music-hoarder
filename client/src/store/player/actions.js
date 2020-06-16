@@ -1,4 +1,5 @@
 import axios from "axios"
+import { addAlert } from "../alerts/actions"
 
 export const SET_PLAYER_STATE = "SET_PLAYER_STATE"
 export const HANDLE_STATE_CHANGE = "HANDLE_STATE_CHANGE"
@@ -8,41 +9,122 @@ export const CREATE_PLAYER = "CREATE_PLAYER"
 export const PLAY_TRACK = "PLAY_TRACK"
 export const ADD_TO_QUEUE = "ADD_TO_QUEUE"
 
-export const createPlayer = (token) => {
-    return (dispatch) => {
+export const createPlayer = () => {
+    return (dispatch, getState) => {
+        let actualToken = getState().auth.access_token
+
+        // setInterval(() => {
+        //     if (getState().auth.access_token !== actualToken) {
+        //         console.log("not equal")
+        //         actualToken = getState().auth.access_token
+        //     }
+        // }, 1000)
+
         window.onSpotifyWebPlaybackSDKReady = () => {
             const player = new window.Spotify.Player({
                 name: "The Music Hoarder Player",
                 getOAuthToken: (cb) => {
-                    cb(token)
+                    const expirationDate = JSON.parse(
+                        localStorage.getItem("params")
+                    ).expires_in
+                    const expirationTime = new Date(expirationDate).getTime()
+
+                    const launchTokenCheck = (timeout) => {
+                        setTimeout(() => {
+                            checkToken()
+                        }, timeout)
+                    }
+
+                    const checkToken = () => {
+                        if (getState().auth.access_token !== actualToken) {
+                            actualToken = getState().auth.access_token
+                            cb(actualToken)
+                            const newExpirationDate = JSON.parse(
+                                localStorage.getItem("params")
+                            ).expires_in
+                            const newExpirationTime = new Date(
+                                newExpirationDate
+                            ).getTime()
+                            launchTokenCheck(newExpirationTime)
+                        } else {
+                            cb(actualToken)
+                            launchTokenCheck(expirationTime)
+                        }
+                    }
+
+                    cb(actualToken)
+                    launchTokenCheck(expirationTime)
+
+                    // cb(actualToken)
+
+                    // setInterval(() => {
+                    //     if (getState().auth.access_token !== actualToken) {
+                    //         console.log("not equal")
+                    //         actualToken = getState().auth.access_token
+                    //         cb(actualToken)
+                    //     }
+                    // }, 1000)
                 },
             })
 
             // Error handling
             player.addListener("initialization_error", ({ message }) => {
-                console.error(message)
+                // clearInterval(interval)
+                dispatch(
+                    addAlert({
+                        title: "Initialization Error",
+                        text: message,
+                        error: true,
+                    })
+                )
             })
             player.addListener("authentication_error", ({ message }) => {
-                console.error(message)
+                // clearInterval(interval)
+                dispatch(
+                    addAlert({
+                        title: "Authentication Error",
+                        text: message,
+                        error: true,
+                    })
+                )
             })
             player.addListener("account_error", ({ message }) => {
-                console.error(message)
+                // clearInterval(interval)
+                dispatch(
+                    addAlert({
+                        title: "Account Error",
+                        text: message,
+                        error: true,
+                    })
+                )
             })
             player.addListener("playback_error", ({ message }) => {
-                console.error(message)
+                // clearInterval(interval)
+                dispatch(
+                    addAlert({
+                        title: "Playback Error",
+                        text: message,
+                        error: true,
+                    })
+                )
             })
             player.addListener("player_state_changed", (state) => {
+                // clearInterval(interval)
                 dispatch(onStateChange(state))
             })
 
             player.addListener("ready", ({ device_id }) => {
-                dispatch(transferPlaybackHere(device_id, token))
+                dispatch(transferPlaybackHere(device_id, actualToken))
 
                 dispatch(setPlayerState({ deviceId: device_id }))
             })
 
             // Not Ready
             player.addListener("not_ready", ({ device_id }) => {})
+
+            player.addListener("disconnect", () => {
+                // clearInterval(interval)
+            })
 
             // Connect to the player!
             player.connect()
