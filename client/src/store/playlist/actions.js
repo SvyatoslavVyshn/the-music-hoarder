@@ -4,18 +4,28 @@ export const SAVE_TRACK = "SAVE_TRACK"
 
 export const getPlaylist = (token, moods, genres, market) => {
     let params
-    const paramMoods = Object.values(moods)
+    const paramMoods = Object.keys(moods)
 
-    if (paramMoods.every((item) => item == 0)) {
+    if (paramMoods.every((key) => moods[key] == 0)) {
         params = {
             market,
             seed_genres: genres.map((item) => item.toLowerCase()).join(),
         }
     } else {
+        let newMoods = { ...moods }
+
+        for (let key in newMoods) {
+            if (newMoods[key] === 0) {
+                delete newMoods[key]
+            }
+        }
+
+        console.log(newMoods)
+
         params = {
             market,
             seed_genres: genres.map((item) => item.toLowerCase()).join(),
-            ...moods,
+            ...newMoods,
         }
     }
 
