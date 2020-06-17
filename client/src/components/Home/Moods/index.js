@@ -16,6 +16,10 @@ const Moods = (props) => {
         dispatch(changeMood(name, value))
     }
 
+    const handleClear = (name) => {
+        dispatch(changeMood(name, 0))
+    }
+
     return (
         <div className="moods">
             {moods.map((mood) => (
@@ -30,6 +34,7 @@ const Moods = (props) => {
                     textValue={inputReducer.moodValues[mood.code]}
                     name={mood.targetCode}
                     step={mood.step}
+                    onClear={handleClear}
                 />
             ))}
         </div>
