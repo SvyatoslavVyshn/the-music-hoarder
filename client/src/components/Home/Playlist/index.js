@@ -7,7 +7,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 import PlaylistItem from "../PlaylistItem"
 
 import { playTrack } from "../../../store/player/actions"
-import { saveTrack } from "../../../store/playlist/actions"
+import { saveTrack, removeFromLibrary } from "../../../store/playlist/actions"
 import { addAlert } from "../../../store/alerts/actions"
 import { clearFlags } from "../../../store/common/actions"
 
@@ -25,6 +25,17 @@ const Playlist = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if (playlist.flags.deleteTrackSuccess) {
+            dispatch(
+                addAlert({
+                    title: "Success delete",
+                    text: "Successfuly delete track from your library",
+                    timeout: true,
+                })
+            )
+            dispatch(clearFlags())
+        }
+
         if (playlist.flags.addTrackSuccess) {
             dispatch(
                 addAlert({
@@ -45,6 +56,10 @@ const Playlist = (props) => {
 
     const trackSave = (id) => {
         dispatch(saveTrack(props.token, id))
+    }
+
+    const trackDelete = (id) => {
+        dispatch(removeFromLibrary(props.token, id))
     }
 
     // const playAudio = (previewUrl) => {
@@ -90,6 +105,7 @@ const Playlist = (props) => {
                                     token={props.token}
                                     key={track.id}
                                     track={track}
+                                    trackDelete={trackDelete}
                                 />
                             ))}
                     </List>

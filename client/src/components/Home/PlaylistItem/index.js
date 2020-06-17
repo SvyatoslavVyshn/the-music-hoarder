@@ -1,15 +1,17 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import ListItemAvatar from "@material-ui/core/ListItemAvatar"
 import Avatar from "@material-ui/core/Avatar"
 import IconButton from "@material-ui/core/IconButton"
 import AddIcon from "@material-ui/icons/Add"
+import ClearIcon from "@material-ui/icons/Clear"
 
 const PlaylistItem = ({
     track,
     selectTrack,
     trackSave,
+    trackDelete,
     // playAudio,
     product,
     // playingUrl,
@@ -23,6 +25,14 @@ const PlaylistItem = ({
             // playAudio(track.preview_url)
         }
     }
+
+    // const handleTrackActions = () => {
+    //     if (track.added) {
+    //         trackDelete(track.id)
+    //     } else {
+    //         trackSave(track.id)
+    //     }
+    // }
 
     const secondaryText =
         product === "premium" ? (
