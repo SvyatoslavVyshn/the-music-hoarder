@@ -26,13 +26,6 @@ function Home(props) {
     const { access_token, user } = useSelector((state) => state.auth)
 
     useEffect(() => {
-        // dispatch(
-        //     addAlert({
-        //         title: "Hello",
-        //         text: "Hello",
-        //         error: false,
-        //     })
-        // )
         dispatch(getUser())
     }, [dispatch])
 
@@ -67,15 +60,17 @@ function Home(props) {
                                 <Button
                                     color="primary"
                                     disabled={
-                                        inputs.selectedGenres.length < 1 ||
-                                        inputs.selectedGenres.length > 5
+                                        user &&
+                                        (inputs.selectedGenres.length < 1 ||
+                                            inputs.selectedGenres.length > 5)
                                     }
                                     onClick={() =>
                                         dispatch(
                                             getPlaylist(
                                                 access_token,
                                                 inputs.moodValues,
-                                                inputs.selectedGenres
+                                                inputs.selectedGenres,
+                                                user.country
                                             )
                                         )
                                     }

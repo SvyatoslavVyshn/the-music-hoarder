@@ -2,15 +2,28 @@ import axios from "axios"
 export const GET_PLAYLIST = "GET_PLAYLIST"
 export const SAVE_TRACK = "SAVE_TRACK"
 
-export const getPlaylist = (token, moods, genres) => {
+export const getPlaylist = (token, moods, genres, market) => {
+    let params
+    const paramMoods = Object.values(moods)
+
+    if (paramMoods.every((item) => item == 0)) {
+        params = {
+            market,
+            seed_genres: genres.map((item) => item.toLowerCase()).join(),
+        }
+    } else {
+        params = {
+            market,
+            seed_genres: genres.map((item) => item.toLowerCase()).join(),
+            ...moods,
+        }
+    }
+
     const promise = axios.get("https://api.spotify.com/v1/recommendations", {
         headers: {
             Authorization: `Bearer ${token}`,
         },
-        params: {
-            seed_genres: genres.map((item) => item.toLowerCase()).join(),
-            ...moods,
-        },
+        params,
         limit: 20,
     })
 

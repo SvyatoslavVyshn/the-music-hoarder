@@ -24,7 +24,7 @@ export const login = () => {
         if (getHashParams().access_token && getHashParams().expires_in) {
             params = getHashParams()
             const expirationDate = new Date(
-                new Date().getTime() + parseInt(params.expires_in)
+                new Date().getTime() + parseInt(params.expires_in - 3000)
             )
             saveDataToStorage(params.access_token, expirationDate)
             dispatch(
@@ -85,7 +85,7 @@ const saveDataToStorage = (access_token, expirationDate) => {
 export const getNewToken = () => {
     return async (dispatch) => {
         const res = await axios.get("/auth/refresh-token")
-        const expirationDate = new Date(new Date().getTime() + 3600000)
+        const expirationDate = new Date(new Date().getTime() + 3600000 - 3000)
 
         clearLogoutTimer()
         saveDataToStorage(res.data.access_token, expirationDate)
