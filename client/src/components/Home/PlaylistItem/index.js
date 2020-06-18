@@ -12,10 +12,8 @@ const PlaylistItem = ({
     selectTrack,
     trackSave,
     trackDelete,
-    // playAudio,
     product,
-    // playingUrl,
-    // playing,
+    handleAdded,
 }) => {
     const handlePlay = () => {
         if (product === "premium") {
@@ -26,13 +24,15 @@ const PlaylistItem = ({
         }
     }
 
-    // const handleTrackActions = () => {
-    //     if (track.added) {
-    //         trackDelete(track.id)
-    //     } else {
-    //         trackSave(track.id)
-    //     }
-    // }
+    const handleTrackActions = () => {
+        if (track.added) {
+            trackDelete(track.id)
+            handleAdded(track.id)
+        } else {
+            trackSave(track.id)
+            handleAdded(track.id)
+        }
+    }
 
     const secondaryText =
         product === "premium" ? (
@@ -81,10 +81,14 @@ const PlaylistItem = ({
                 aria-label="More"
                 aria-owns="add-btn"
                 aria-haspopup="true"
-                title="add to your library"
-                onClick={() => trackSave(track.id)}
+                title={
+                    track.added
+                        ? "remove from your library"
+                        : "add to your library"
+                }
+                onClick={handleTrackActions}
             >
-                <AddIcon />
+                {track.added ? <ClearIcon /> : <AddIcon />}
             </IconButton>
         </ListItem>
     )

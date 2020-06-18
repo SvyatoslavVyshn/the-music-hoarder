@@ -1,4 +1,4 @@
-import { GET_PLAYLIST, SAVE_TRACK, DELETE_TRACK } from "./actions"
+import { GET_PLAYLIST, SAVE_TRACK, DELETE_TRACK, CHANGE_ADDED } from "./actions"
 import { CLEAR_FLAGS } from "../common/actions"
 import { FULFILLED } from "../../constants"
 
@@ -33,13 +33,26 @@ export default function playlistReducer(
             }
         }
 
-        case FULFILLED(SAVE_TRACK): {
+        case FULFILLED(DELETE_TRACK): {
             return {
                 ...state,
                 flags: {
                     ...state.flags,
                     deleteTrackSuccess: true,
                 },
+            }
+        }
+
+        case CHANGE_ADDED: {
+            const newTracks = state.tracks.slice()
+            const trackIndex = newTracks.findIndex(
+                (track) => track.id === payload
+            )
+            newTracks[trackIndex].added = !newTracks[trackIndex].added
+
+            return {
+                ...state,
+                tracks: newTracks,
             }
         }
 

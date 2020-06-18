@@ -1,28 +1,28 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import List from "@material-ui/core/List"
-// import Paper from "@material-ui/core/Paper"
 import MusicNoteIcon from "@material-ui/icons/MusicNote"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import PlaylistItem from "../PlaylistItem"
 
 import { playTrack } from "../../../store/player/actions"
-import { saveTrack, removeFromLibrary } from "../../../store/playlist/actions"
+import {
+    saveTrack,
+    removeFromLibrary,
+    changeAdded,
+} from "../../../store/playlist/actions"
 import { addAlert } from "../../../store/alerts/actions"
 import { clearFlags } from "../../../store/common/actions"
 
 import "./playlist.scss"
 
 const Playlist = (props) => {
-    // const [playingUrl, setPlayingUrl] = useState("")
-    // const [stateAudio, setStateAudio] = useState(null)
-    // const [playing, setPlaying] = useState(false)
-
     const playlist = useSelector((state) => state.playlist)
     const deviceId = useSelector((state) => state.player.deviceId)
     const { product } = useSelector((state) => state.auth.user)
 
     const dispatch = useDispatch()
+    console.log(playlist.flags.deleteTrackSuccess)
 
     useEffect(() => {
         if (playlist.flags.deleteTrackSuccess) {
@@ -34,9 +34,7 @@ const Playlist = (props) => {
                 })
             )
             dispatch(clearFlags())
-        }
-
-        if (playlist.flags.addTrackSuccess) {
+        } else if (playlist.flags.addTrackSuccess) {
             dispatch(
                 addAlert({
                     title: "Success",
@@ -46,7 +44,15 @@ const Playlist = (props) => {
             )
             dispatch(clearFlags())
         }
-    }, [dispatch, playlist.flags.addTrackSuccess])
+    }, [
+        dispatch,
+        playlist.flags.addTrackSuccess,
+        playlist.flags.deleteTrackSuccess,
+    ])
+
+    const handleAdded = (id) => {
+        dispatch(changeAdded(id))
+    }
 
     const selectTrack = (uri) => {
         const uris = playlist.tracks.map((track) => track.uri)
@@ -62,31 +68,6 @@ const Playlist = (props) => {
         dispatch(removeFromLibrary(props.token, id))
     }
 
-    // const playAudio = (previewUrl) => {
-    //     if (previewUrl) {
-    //         let audio = new Audio(previewUrl)
-    //         if (!playing) {
-    //             audio.play()
-    //             setPlaying(true)
-    //             setPlayingUrl(previewUrl)
-    //             setStateAudio(audio)
-    //         } else {
-    //             if (playingUrl === previewUrl) {
-    //                 stateAudio.pause()
-    //                 setPlaying(false)
-    //             } else {
-    //                 stateAudio.pause()
-    //                 stateAudio.play()
-    //                 setPlayingUrl(previewUrl)
-    //                 setPlaying(true)
-    //                 setStateAudio(audio)
-    //             }
-    //         }
-    //     } else {
-    //         console.log("Sorry, demo for this song is not available")
-    //     }
-    // }
-
     return (
         <div className="playlist-container">
             {playlist.tracks &&
@@ -96,16 +77,14 @@ const Playlist = (props) => {
                         {playlist.tracks &&
                             playlist.tracks.map((track) => (
                                 <PlaylistItem
-                                    // playAudio={playAudio}
                                     product={product}
-                                    // playing={playing}
-                                    // playingUrl={playingUrl}
                                     trackSave={trackSave}
                                     selectTrack={selectTrack}
                                     token={props.token}
                                     key={track.id}
                                     track={track}
                                     trackDelete={trackDelete}
+                                    handleAdded={handleAdded}
                                 />
                             ))}
                     </List>
