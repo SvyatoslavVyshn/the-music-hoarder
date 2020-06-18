@@ -13,13 +13,6 @@ export const createPlayer = () => {
     return (dispatch, getState) => {
         let actualToken = getState().auth.access_token
 
-        // setInterval(() => {
-        //     if (getState().auth.access_token !== actualToken) {
-        //         console.log("not equal")
-        //         actualToken = getState().auth.access_token
-        //     }
-        // }, 1000)
-
         window.onSpotifyWebPlaybackSDKReady = () => {
             const player = new window.Spotify.Player({
                 name: "The Music Hoarder Player",
@@ -54,16 +47,6 @@ export const createPlayer = () => {
 
                     cb(actualToken)
                     launchTokenCheck(expirationTime)
-
-                    // cb(actualToken)
-
-                    // setInterval(() => {
-                    //     if (getState().auth.access_token !== actualToken) {
-                    //         console.log("not equal")
-                    //         actualToken = getState().auth.access_token
-                    //         cb(actualToken)
-                    //     }
-                    // }, 1000)
                 },
             })
 

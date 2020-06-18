@@ -40,7 +40,10 @@ export default function alerts(state = [], { type, payload }) {
         }
 
         case ADD_ALERT: {
-            return state.concat(payload)
+            return state.concat({
+                id: getId(),
+                ...payload,
+            })
         }
 
         default:

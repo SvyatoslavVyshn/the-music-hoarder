@@ -22,7 +22,6 @@ const Playlist = (props) => {
     const { product } = useSelector((state) => state.auth.user)
 
     const dispatch = useDispatch()
-    console.log(playlist.flags.deleteTrackSuccess)
 
     useEffect(() => {
         if (playlist.flags.deleteTrackSuccess) {
