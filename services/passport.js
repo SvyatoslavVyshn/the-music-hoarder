@@ -21,7 +21,6 @@ passport.use(
             clientID: keys.spotifyClientID,
             clientSecret: keys.spotifyClientSecret,
             callbackURL: "/auth/callback",
-            proxy: true,
         },
         async (accessToken, refreshToken, profile, done) => {
             const existingUser = await User.findOne({ spotifyId: profile.id })
