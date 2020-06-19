@@ -18,6 +18,7 @@ export const getPlaylist = (token, moods, genres, market) => {
     if (paramMoods.every((key) => moods[key] == 0)) {
         params = {
             market,
+            limit: 50,
             seed_genres: genres.map((item) => item.toLowerCase()).join(),
         }
     } else {
@@ -31,6 +32,7 @@ export const getPlaylist = (token, moods, genres, market) => {
 
         params = {
             market,
+            limit: 50,
             seed_genres: genres.map((item) => item.toLowerCase()).join(),
             ...newMoods,
         }
@@ -41,7 +43,6 @@ export const getPlaylist = (token, moods, genres, market) => {
             Authorization: `Bearer ${token}`,
         },
         params,
-        limit: 20,
     })
 
     return {

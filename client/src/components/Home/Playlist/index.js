@@ -28,7 +28,7 @@ const Playlist = (props) => {
             dispatch(
                 addAlert({
                     title: "Success delete",
-                    text: "Successfuly delete track from your library",
+                    text: "Successfuly deleted track from your library",
                     timeout: true,
                 })
             )
