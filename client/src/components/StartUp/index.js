@@ -35,6 +35,7 @@ const StartUp = (props) => {
                 !access_token ||
                 !expirationDate
             ) {
+                localStorage.removeItem("params")
                 history.push("/login")
                 return
             }
